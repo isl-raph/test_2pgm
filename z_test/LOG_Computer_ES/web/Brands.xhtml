@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">Gestion des Marques</ui:define>
+    <ui:define name="top">
+        <h2>Gestion des Marques</h2>
+    </ui:define>
+    <ui:define name="menu">
+    </ui:define>
+    <ui:define name="search">
+        <h:form id="sF">
+            <table>
+                <tr>
+                    <td>Nom de la marque</td>
+                    <td><h:inputText value="#{brandCtrl.search.name}" /></td>                                                      
+                </tr>
+                <tr>
+                    <td><h:commandButton value="Rechecher"
+                                         action="#{brandCtrl.doSearch}" /></td>
+                </tr>                
+            </table>
+        </h:form>
+    </ui:define>
+    <ui:define name="list">
+        <h:form id="listF">
+            <h:dataTable 
+                value="#{brandCtrl.items}" var="brand" border="1">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Marque"/>
+                    </f:facet>
+                    <h:outputText value="#{brand.name}" />
+                </h:column>                        
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id"/>
+                    </f:facet>
+                    <h:commandLink action="#{brandCtrl.prepareEdit()}" 
+                                   value="#{brand.brandId}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+    <ui:define name="detail">
+        <h:form id="detailF">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nom" 
+                               for="brandName" />
+                <h:inputText id="brandName" 
+                             value="#{brandCtrl.current.name}" 
+                             size="50"
+                             title="Nom" />                   
+            </h:panelGrid>                 
+            <fieldset>
+                <legend>Marque</legend>
+                <h:commandButton action="#{brandCtrl.doUpdate()}" 
+                                 value="Sauver"/>
+                <h:commandButton action="#{brandCtrl.doNew()}" 
+                                 value="Nouveau"/>                        
+                <h:commandButton action="#{brandCtrl.doDelete()}" 
+                                 value="Supprimer"/>
+            </fieldset>
+        </h:form>            
+    </ui:define>
+</ui:composition>

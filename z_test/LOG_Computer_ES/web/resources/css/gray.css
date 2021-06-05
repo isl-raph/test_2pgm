@@ -1,0 +1,107 @@
+.wrapper{
+    width: 900px;
+    height: 650px;
+    color: #000000;
+    font-family: Verdana,sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    border: solid 1px #3366FF;
+    text-align: center;
+}
+#top {
+    width: 884px;
+    height: 50px;
+    padding:3px;
+    margin:3px;
+    background-color: #DDDDDD;
+    border-radius: 5px;
+    border: solid 1px #3366FF;
+}
+
+#menu {
+    width: 884px;
+    height: 50px;    
+    padding:3px;
+    margin:3px;
+    background-color: #DDDDDD;
+    border-radius: 5px;
+    border: solid 1px #3366FF;
+}
+
+#search {
+    width: 884px;
+    height: 100px;    
+    padding:3px;
+    margin:3px;
+    background-color: #DDDDDD;
+    border-radius: 5px;
+    border: solid 1px #3366FF;
+}
+
+#list {
+    float: left;
+    width: 400px;
+    height: 400px;
+    padding:3px;
+    margin:3px;
+    background-color: #DDDDDD;
+    border-radius: 5px;
+    border: solid 1px #3366FF;
+    overflow-y: auto;
+}
+
+#detail {
+    float: right;
+    width: 470px;
+    height: 400px;
+    padding:3px;
+    margin:3px;
+    background-color: #DDDDDD;
+    border-radius: 5px;
+    border: solid 1px #3366FF;
+}
+
+.computerBrandCol{
+    width: 100px;
+}
+.computerModelCol{
+    width: 100px;
+}
+.computerNameCol{
+    width: 200px;
+}
+.computerIdCol{
+    width:30px
+}
+
+.studentCol{
+    width: 100px;
+    border-width: 1px;
+} 
+.yearsCol{
+    width: 75px;
+    text-align: right;
+    border-width: 1px;
+}
+.resultCol{
+    width: 50px;
+    text-align: right;
+    border-width: 1px;
+}
+.supCol{
+    width: 40px;
+    border-width: 1px;
+} 
+
+
+
+

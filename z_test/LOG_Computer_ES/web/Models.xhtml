@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">Gestion des Modèles</ui:define>
+    <ui:define name="top">
+        <h2>Gestion des Modèles</h2>
+    </ui:define>
+    <ui:define name="menu">
+    </ui:define>
+    <ui:define name="search">
+        <h:form id="sF">
+            <table>
+                <tr>
+                    <td>Nom de la marque</td>
+                    <td><h:inputText value="#{modelCtrl.search.brandName}" /></td>  
+                    <td>Nom du modèle</td>
+                    <td><h:inputText value="#{modelCtrl.search.modelName}" /></td>                                                      
+                    <td>Description</td>
+                    <td><h:inputText value="#{modelCtrl.search.description}" /></td>                                                      
+                </tr>
+                <tr>
+                    <td><h:commandButton value="Rechecher"
+                                         action="#{modelCtrl.doSearch}" /></td>
+                </tr>                
+            </table>
+        </h:form>
+    </ui:define>
+    <ui:define name="list">
+        <h:form id="listF">
+            <h:dataTable 
+                value="#{modelCtrl.items}" var="model" border="1">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Marque"/>
+                    </f:facet>
+                    <h:outputText value="#{model.brand.name}" />
+                </h:column> 
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modèle"/>
+                    </f:facet>
+                    <h:outputText value="#{model.name}" />
+                </h:column>                        
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id"/>
+                    </f:facet>
+                    <h:commandLink action="#{modelCtrl.prepareEdit()}" 
+                                   value="#{model.modelId}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+    <ui:define name="detail">
+        <h:form id="detailF">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Marque" 
+                               for="brand" />
+                <h:selectOneMenu id="brand" 
+                                 value="#{modelCtrl.current.brand}"
+                                 style="width: 325px;">
+                    <f:selectItems value="#{brandCtrl.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>                
+                <h:outputLabel value="Nom" 
+                               for="modelName" />
+                <h:inputText id="modelName" 
+                             value="#{modelCtrl.current.name}" 
+                             size="50"
+                             title="Nom" />   
+                <h:outputLabel value="Description" 
+                               for="description" />
+                <h:inputTextarea id="description" 
+                             value="#{modelCtrl.current.description}" 
+                             cols="38"
+                             rows="5"
+                             title="Descrition" />
+                <h:outputLabel value="Modèle d'ordinateur" 
+                               for="isComputerModel" />                
+                <h:selectBooleanCheckbox 
+                    id="isComputerModel"
+                    style="width:150px;" 
+                    value="#{modelCtrl.current.isComputerModel}"/>                
+            </h:panelGrid>                 
+            <fieldset>
+                <legend>Marque</legend>
+                <h:commandButton action="#{modelCtrl.doUpdate()}" 
+                                 value="Sauver"/>
+                <h:commandButton action="#{modelCtrl.doNew()}" 
+                                 value="Nouveau"/>                        
+                <h:commandButton action="#{modelCtrl.doDelete()}" 
+                                 value="Supprimer"/>
+            </fieldset>
+        </h:form>            
+    </ui:define>
+</ui:composition>

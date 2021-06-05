@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">Gestion des Types</ui:define>
+    <ui:define name="top">
+        <h2>Gestion des Types</h2>
+    </ui:define>
+    <ui:define name="menu">
+    </ui:define>
+    <ui:define name="search">
+        <h:form id="sF">
+            <table>
+                <tr>
+                    <td>Nom du type</td>
+                    <td><h:inputText value="#{typeCtrl.search.name}" /></td>                                                      
+                </tr>
+                <tr>
+                    <td><h:commandButton value="Rechecher"
+                                         action="#{typeCtrl.doSearch}" /></td>
+                </tr>                
+            </table>
+        </h:form>
+    </ui:define>
+    <ui:define name="list">
+        <h:form id="listF">
+            <h:dataTable 
+                value="#{typeCtrl.items}" var="type" border="1">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Type"/>
+                    </f:facet>
+                    <h:outputText value="#{type.name}" />
+                </h:column>                        
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id"/>
+                    </f:facet>
+                    <h:commandLink action="#{typeCtrl.prepareEdit()}" 
+                                   value="#{type.typeId}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+    <ui:define name="detail">
+        <h:form id="detailF">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nom" 
+                               for="typeName" />
+                <h:inputText id="typeName" 
+                             value="#{typeCtrl.current.name}" 
+                             size="50"
+                             title="Nom" />                   
+            </h:panelGrid>                 
+            <fieldset>
+                <legend>Marque</legend>
+                <h:commandButton action="#{typeCtrl.doUpdate()}" 
+                                 value="Sauver"/>
+                <h:commandButton action="#{typeCtrl.doNew()}" 
+                                 value="Nouveau"/>                        
+                <h:commandButton action="#{typeCtrl.doDelete()}" 
+                                 value="Supprimer"/>
+            </fieldset>
+        </h:form>            
+    </ui:define>
+</ui:composition>

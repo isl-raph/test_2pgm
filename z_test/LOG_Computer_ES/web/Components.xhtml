@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">Gestion des Composants</ui:define>    
+    <ui:define name="top">
+        <h2>Gestion des Composants</h2>
+    </ui:define>
+    <ui:define name="menu">
+    </ui:define>
+    <ui:define name="search">
+        <h:form id="sF">
+            <table>
+                <tr>
+                    <td>Nom</td>
+                    <td><h:inputText value="#{componentCtrl.search.componentName}" /></td>                            
+                    <td>Marque</td>
+                    <td><h:inputText value="#{componentCtrl.search.componentBrand}" /></td> 
+                </tr>
+                <tr>                    
+                    <td>Modèle</td>
+                    <td><h:inputText value="#{componentCtrl.search.componentModel}" /></td>                             
+                    <td>Type</td>
+                    <td><h:inputText value="#{componentCtrl.search.componentType}" /></td>
+                </tr>
+                <tr>
+                    <td><h:commandButton value="Rechecher"
+                                         action="#{componentCtrl.doSearch}" /></td>
+                </tr>
+            </table>
+        </h:form>
+    </ui:define>
+    <ui:define name="list">
+        <h:form id="listF">
+            <h:dataTable 
+                columnClasses="componentBrandCol,componentModelCol,componentNameCol,componentIdCol"
+                value="#{componentCtrl.items}" var="comp" border="1">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Marque"/>
+                    </f:facet>
+                    <h:outputText value="#{comp.brand.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Modèle"/>
+                    </f:facet>
+                    <h:outputText value="#{comp.model.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nom"/>
+                    </f:facet>
+                    <h:outputText value="#{comp.name}" />
+                </h:column>                        
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id"/>
+                    </f:facet>
+                    <h:commandLink action="#{componentCtrl.prepareEdit()}" 
+                                   value="#{comp.componentId}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+    <ui:define name="detail">
+        <h:form id="detailF">
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Type" 
+                               for="type" />
+                <h:selectOneMenu id="type" 
+                                 value="#{componentCtrl.current.type}"
+                                 style="width: 325px;">
+                    <f:selectItems value="#{typeCtrl.itemsAvailableSelectOne}"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="Marque" 
+                               for="brand" />
+                <h:selectOneMenu id="brand" 
+                                 value="#{componentCtrl.current.brand}"
+                                 style="width: 325px;">
+                    <f:selectItems value="#{brandCtrl.itemsAvailableSelectOne}"/>
+                    <f:ajax render="model" 
+                            listener="#{componentCtrl.listenerBrandSelected}"/>                     
+                </h:selectOneMenu>
+                <h:outputLabel value="Modèle" 
+                               for="model" />                        
+                <h:selectOneMenu id="model" 
+                                 value="#{componentCtrl.current.model}"
+                                 style="width: 325px;">
+                    <f:selectItems value="#{componentCtrl.modelItems}"/>
+                </h:selectOneMenu> 
+                <h:outputLabel value="Nom" 
+                               for="componentName" />                
+                <h:inputText id="componentName" 
+                             value="#{componentCtrl.current.name}" 
+                             size="50"
+                             title="Nom" />
+            </h:panelGrid>                 
+            <fieldset>
+                <legend>PC</legend>
+                <h:commandButton action="#{componentCtrl.doUpdate()}" 
+                                 value="Sauver"/>
+                <h:commandButton action="#{componentCtrl.doNew()}" 
+                                 value="Nouveau"/>                        
+                <h:commandButton action="#{componentCtrl.doDelete()}" 
+                                 value="Supprimer"/>
+            </fieldset>
+        </h:form>            
+    </ui:define>
+</ui:composition>
